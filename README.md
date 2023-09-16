@@ -21,11 +21,11 @@ npm i
 ````
 -----
 
-## Edit file.env
+### Edit file.env
 
-1.LINE_CHANNEL_ACCESS_TOKEN=''
-2.DIALOGFLOW_AGENT_ID=''
-3.LINE_NOTIFY=''
+1. LINE_CHANNEL_ACCESS_TOKEN=''
+2. DIALOGFLOW_AGENT_ID=''
+
 -----
 
 ## Firebase emulators:start
