@@ -4,7 +4,7 @@ const line = require('../util/line.util');
 const dialogflow = require('../util/dialogflow.util');
 const flexOrder = require('../flex/order');
 
-exports.webhook = onRequest({ region: "asia-northeast1" }, async (request, response) => {
+exports.webhook = onRequest(async (request, response) => {
 
   if (request.method !== "POST") {
     return response.send(request.method);
@@ -25,7 +25,7 @@ exports.webhook = onRequest({ region: "asia-northeast1" }, async (request, respo
 
 });
 
-exports.fulfillment = onRequest({ region: "asia-northeast1" }, async (request, response) => {
+exports.fulfillment = onRequest(async (request, response) => {
 
   if (request.body.originalDetectIntentRequest.source === "line") {
     const replyToken = request.body.originalDetectIntentRequest.payload.data.replyToken

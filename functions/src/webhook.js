@@ -1,6 +1,7 @@
 const { onRequest, } = require("firebase-functions/v2/https");
 const line = require('../util/line.util');
 const flex_unix_time = require('../flex/unix_time');
+const { default: axios } = require("axios");
 
 exports.basic = onRequest(async (request, response) => {
 
