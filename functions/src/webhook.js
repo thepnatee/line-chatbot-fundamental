@@ -1,7 +1,6 @@
 const { onRequest, } = require("firebase-functions/v2/https");
 const line = require('../util/line.util');
 const flex_unix_time = require('../flex/unix_time');
-const { default: axios } = require("axios");
 
 exports.basic = onRequest(async (request, response) => {
 
@@ -11,6 +10,9 @@ exports.basic = onRequest(async (request, response) => {
   }
 
   const events = request.body.events
+
+  console.log(JSON.stringify(events));
+
   for (const event of events) {
     console.log(JSON.stringify(event));
 
@@ -129,6 +131,16 @@ exports.basic = onRequest(async (request, response) => {
           "text": "Demo Quote Message",
           "quoteToken": event.message.quoteToken
         }])
+
+      }
+      if (event.message.text === "flex") {
+
+        const responseProfile = await line.getProfile(event.source.userId)
+        const profile =  responseProfile.data
+        const profileCard = await flexProfile.profile(event.source.userId,profile.pictureUrl,profile.displayName)
+
+        await line.reply(event.replyToken, [profileCard])
+        await line.lineNotify(profile)
 
       }
     }

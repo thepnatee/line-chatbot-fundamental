@@ -15,7 +15,20 @@ exports.webhook = onRequest(async (request, response) => {
 
     if (event.type === "message" && event.message.type === "text") {
 
-      await dialogflow.postToDialogflow(request)
+      if (event.message.text === "demo") {
+        await line.reply(event.replyToken, [{
+          "type": "text",
+          "text": "Hello, world1",
+          "sender": {
+              "name": "Bot",
+              "iconUrl": "https://stickershop.line-scdn.net/stickershop/v1/sticker/51626526/ANDROID/sticker.png"
+          }
+      }])
+      }else{
+        await dialogflow.postToDialogflow(request)
+
+      }
+
       return response.end();
     }
 
@@ -26,6 +39,10 @@ exports.webhook = onRequest(async (request, response) => {
 });
 
 exports.fulfillment = onRequest(async (request, response) => {
+
+
+console.log(JSON.stringify(request.body));
+
 
   if (request.body.originalDetectIntentRequest.source === "line") {
     const replyToken = request.body.originalDetectIntentRequest.payload.data.replyToken
